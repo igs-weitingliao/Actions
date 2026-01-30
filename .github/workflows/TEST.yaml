@@ -9,10 +9,8 @@ on:
         required: true
 
 jobs:
-  Release:
+  ShowReleaseInfo:
     runs-on: ubuntu-latest
-    environment:
-      name: prod
     steps:
       - name: Get Release Info
         uses: igs-weitingliao/test_release_summary_for_approval@main
@@ -25,3 +23,16 @@ jobs:
       - name: Show Release Summary
         run: |
           echo -e "$(cat $GITHUB_STEP_SUMMARY)" > $GITHUB_STEP_SUMMARY
+
+  Approval:
+    runs-on: ubuntu-latest
+    needs: ShowReleaseInfo
+    environment:
+      name: prod
+    steps:
+      - name: Show Approval Result
+        run: |
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "簽核結果: APPROVED ✅"
+          else
+            echo "簽核結果: REJECTED ❌"
