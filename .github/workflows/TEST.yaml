@@ -11,6 +11,8 @@ on:
 jobs:
   Release:
     runs-on: ubuntu-latest
+    environment:
+      name: prod
     steps:
       - name: Get Release Info
         uses: igs-weitingliao/test_release_summary_for_approval@main
@@ -18,9 +20,8 @@ jobs:
           org: "igs-weitingliao"
           repo: "TestArtifacts"
           tag: ${{ github.event.inputs.input_tag }}
-          token: ${{ secrets.REPO_RELEASE_INFO_PAT }}
+          token: ${{ secrets.REPO_RELEASE_INFO_PAT  }}
 
-      # 要在 Workflow 呼叫一次 $GITHUB_STEP_SUMMARY 標題才會正常顯示 Release + summary
       - name: Show Release Summary
         run: |
           echo -e "$(cat $GITHUB_STEP_SUMMARY)" > $GITHUB_STEP_SUMMARY
