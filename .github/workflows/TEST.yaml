@@ -1,20 +1,26 @@
-name: Hello Workflow
+name: Get Release Info
+run-name: "[測試] Trigger 發佈版本 ${{ github.event.inputs.input_tag }}"
 
 on:
   workflow_dispatch:
     inputs:
       input_tag:
-        description: "Tag to get release info for"
+        description: "Release tag to fetch info for"
         required: true
 
 jobs:
-  say-hello:
-    runs-on: ubuntu-latest
+  Release:
+    runs-on: self-hosted
     steps:
       - name: Get Release Info
         uses: igs-weitingliao/test_release_summary_for_approval@main
         with:
           org: "igs-weitingliao"
-          repo: "TestArtifacts"
+          repo: "test_release_summary_for_approval"
           tag: ${{ github.event.inputs.input_tag }}
-          token: ${{ secrets.PRIVATE_ACTION_PAT }}
+          token: ${{ secrets.REPO_RELEASE_INFO_PAT }}
+
+      # 要在 Workflow 呼叫一次 $GITHUB_STEP_SUMMARY 標題才會正常顯示 Release + summary
+      - name: Show Release Summary
+        run: |
+          echo -e "$(cat $GITHUB_STEP_SUMMARY)" > $GITHUB_STEP_SUMMARY
