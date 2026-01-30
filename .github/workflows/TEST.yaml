@@ -32,10 +32,10 @@ jobs:
     steps:
       - name: Show Approval Result
         if: ${{ success() }}
-        run: echo "簽核結果: APPROVED ✅"
-  
+        run: |
+          echo "簽核結果: APPROVED ✅"
+
       - name: Show Rejected
         if: ${{ failure() }}
-        run: echo "簽核結果: REJECTED ❌"
-
-
+        run: |
+          echo "簽核結果: REJECTED ❌"
