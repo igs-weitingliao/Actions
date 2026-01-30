@@ -1,9 +1,11 @@
 name: Hello Workflow
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      input_tag:
+        description: "Tag to get release info for"
+        required: true
 
 jobs:
   say-hello:
@@ -15,4 +17,4 @@ jobs:
           org: "igs-weitingliao"
           repo: "TestArtifacts"
           tag: ${{ github.event.inputs.input_tag }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PRIVATE_ACTION_PAT }}
