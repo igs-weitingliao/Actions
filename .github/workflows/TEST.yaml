@@ -10,7 +10,7 @@ on:
 
 jobs:
   Release:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Get Release Info
         uses: igs-weitingliao/test_release_summary_for_approval@main
