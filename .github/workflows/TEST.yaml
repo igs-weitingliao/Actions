@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get Release Info
-        uses: IGS-ARCADE-DIVISION-RD5/release_summary_for_approval@main
+        uses: igs-weitingliao/test_release_summary_for_approval@main
         with:
           org: "igs-weitingliao"
           repo: "TestArtifacts"
