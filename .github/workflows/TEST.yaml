@@ -9,5 +9,10 @@ jobs:
   say-hello:
     runs-on: ubuntu-latest
     steps:
-      - name: Print Hello
-        run: echo "Hello"
+      - name: Get Release Info
+        uses: IGS-ARCADE-DIVISION-RD5/release_summary_for_approval@main
+        with:
+          org: "igs-weitingliao"
+          repo: "TestArtifacts"
+          tag: ${{ github.event.inputs.input_tag }}
+          token: ${{ secrets.GITHUB_TOKEN }}
