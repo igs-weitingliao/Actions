@@ -4,6 +4,9 @@ run-name: "[測試] Trigger 發佈版本 ${{ github.event.inputs.input_tag }}"
 on:
   workflow_dispatch:
     inputs:
+      repo:
+        description: "Repo name"
+        required: true
       input_tag:
         description: "Release tag to fetch info for"
         required: true
@@ -16,7 +19,7 @@ jobs:
         uses: igs-weitingliao/test_release_summary_for_approval@main
         with:
           org: "igs-weitingliao"
-          repo: "TestArtifacts"
+          repo: ${{github.event.inputs.repo}}
           tag: ${{ github.event.inputs.input_tag }}
           token: ${{ secrets.REPO_RELEASE_INFO_PAT  }}
 
