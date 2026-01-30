@@ -16,7 +16,7 @@ jobs:
         uses: igs-weitingliao/test_release_summary_for_approval@main
         with:
           org: "igs-weitingliao"
-          repo: "test_release_summary_for_approval"
+          repo: "TestArtifacts"
           tag: ${{ github.event.inputs.input_tag }}
           token: ${{ secrets.REPO_RELEASE_INFO_PAT }}
 
