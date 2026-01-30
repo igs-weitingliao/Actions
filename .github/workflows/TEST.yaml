@@ -31,8 +31,10 @@ jobs:
       name: prod
     steps:
       - name: Show Approval Result
-        run: |
-          if [ "${{ job.status }}" == "success" ]; then
-            echo "簽核結果: APPROVED ✅"
-          else
-            echo "簽核結果: REJECTED ❌"
+        if: ${{ success() }}
+        run: echo "簽核結果: APPROVED ✅"
+
+      - name: Show Rejected
+        if: ${{ failure() }}
+        run: echo "簽核結果: REJECTED ❌"
+
